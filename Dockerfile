@@ -36,4 +36,4 @@ EXPOSE 80 443
 VOLUME /config
 VOLUME /etc/letsencrypt
 ENV YOUR_EMAIL=
-ENV YOUR_DOMAIN=yourdomain.com, www.yourdomain.com
+ENV YOUR_DOMAIN=

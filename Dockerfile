@@ -28,12 +28,12 @@ ADD crons.conf /config/crons.conf
 
 RUN wget -P /usr/bin https://dl.eff.org/certbot-auto
 RUN chmod a+x /usr/bin/certbot-auto
-ADD cli.ini /config/cli.ini
+
 
 RUN	apt-get update
 RUN	/usr/bin/certbot-auto --noninteractive --os-packages-only
 RUN mkdir -p /etc/letsencrypt
-RUN cp /config/cli.ini /etc/letsencrypt/cli.ini	
+ADD cli.ini /etc/letsencrypt/cli.ini	
 
 
 # ports and volumes

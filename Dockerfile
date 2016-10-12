@@ -34,7 +34,7 @@ RUN	apt-get update
 RUN	/usr/bin/certbot-auto --noninteractive --os-packages-only
 RUN mkdir -p /etc/letsencrypt
 RUN cp /config/cli.ini /etc/letsencrypt/cli.ini	
-RUN	/usr/bin/certbot-auto certonly --noninteractive
+RUN	/usr/bin/certbot-auto certonly --noninteractive --agree-tos
 
 # ports and volumes
 EXPOSE 80 443

@@ -24,16 +24,18 @@ RUN a2enmod proxy proxy_http proxy_ajp rewrite deflate substitute headers proxy_
 ADD firstrun.sh /etc/my_init.d/firstrun.sh
 RUN chmod +x /etc/my_init.d/firstrun.sh
 
-cd /usr/bin/
-wget https://dl.eff.org/certbot-auto
-chmod a+x /usr/bin/certbot-auto
-certbot-auto --noninteractive --os-packages-only
-ADD cli.ini /etc/letsencrypt/cli.ini
-certbot-auto certonly --noninteractive
+ADD crons.conf /config
+
+
+wget https://dl.eff.org/certbot-auto /usr/bin/
+RUN chmod a+x /usr/bin/certbot-auto
+ADD cli.ini /config/cli.ini
+
+
 
 # ports and volumes
 EXPOSE 80 443
 VOLUME /config
 VOLUME /etc/letsencrypt
-ENV YOUR_EMAIL=
-ENV YOUR_DOMAIN=
+ENV YOUR_EMAIL="youremail@here.com"
+ENV YOUR_DOMAIN="yourdomain.com, www.yourdomain.com"

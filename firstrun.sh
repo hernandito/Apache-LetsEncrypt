@@ -3,13 +3,16 @@ crontab /config/crons.conf
 export HOME="/root"
 export PATH="${PATH}:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
 
- # No package install yet.
+
 
 if [ ! -f /usr/bin/certbot-auto ]; then
-	cd /usr/bin/
-	wget https://dl.eff.org/certbot-auto
+	wget https://dl.eff.org/certbot-auto /usr/bin/
 	chmod a+x /usr/bin/certbot-auto
 	apt-get update
-	apt-get install -y mc
 	certbot-auto --noninteractive --os-packages-only
+	
+	mkdir -p /etc/letsencrypt
+	cp /config/cli.ini /etc/letsencrypt/cli.ini	
+	certbot-auto certonly --noninteractive
+
 fi

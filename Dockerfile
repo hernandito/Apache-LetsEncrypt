@@ -21,8 +21,8 @@ RUN chmod -v +x /etc/service/*/run /etc/service/*/finish /etc/my_init.d/*.sh
 # Update apache configuration with this one
 RUN a2enmod proxy proxy_http proxy_ajp rewrite deflate substitute headers proxy_balancer proxy_connect proxy_html xml2enc authnz_ldap
 
-ADD firstrun.sh /etc/my_init.d/firstrun.sh
-RUN chmod +x /etc/my_init.d/firstrun.sh
+#ADD firstrun.sh /etc/my_init.d/firstrun.sh
+#RUN chmod +x /etc/my_init.d/firstrun.sh
 
 ADD crons.conf /config/crons.conf
 
@@ -34,7 +34,6 @@ RUN	apt-get update
 RUN	/usr/bin/certbot-auto --noninteractive --os-packages-only
 RUN mkdir -p /etc/letsencrypt
 ADD cli.ini /etc/letsencrypt/cli.ini	
-
 
 # ports and volumes
 EXPOSE 80 443

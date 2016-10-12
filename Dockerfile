@@ -32,8 +32,8 @@ ADD cli.ini /config/cli.ini
 
 RUN	apt-get update
 RUN	/usr/bin/certbot-auto --noninteractive --os-packages-only
-mkdir -p /etc/letsencrypt
-cp /config/cli.ini /etc/letsencrypt/cli.ini	
+RUN mkdir -p /etc/letsencrypt
+RUN cp /config/cli.ini /etc/letsencrypt/cli.ini	
 RUN	/usr/bin/certbot-auto certonly --noninteractive
 
 # ports and volumes

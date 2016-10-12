@@ -8,7 +8,7 @@
 #	mkdir -p /etc/letsencrypt
 #	cp /config/cli.ini /etc/letsencrypt/cli.ini	
 #	certbot-auto certonly --noninteractive
-certbot-auto certonly --noninteractive --agree-tos	
+#certbot-auto certonly --noninteractive --agree-tos	
 
 
 	

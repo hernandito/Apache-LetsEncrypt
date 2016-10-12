@@ -24,7 +24,7 @@ RUN a2enmod proxy proxy_http proxy_ajp rewrite deflate substitute headers proxy_
 ADD firstrun.sh /etc/my_init.d/firstrun.sh
 RUN chmod +x /etc/my_init.d/firstrun.sh
 
-ADD crons.conf /config
+ADD crons.conf /config/crons.conf
 
 RUN wget -P /usr/bin https://dl.eff.org/certbot-auto
 RUN chmod a+x /usr/bin/certbot-auto

@@ -36,10 +36,6 @@ RUN chmod a+x /usr/bin/certbot-auto
 RUN	apt-get update
 RUN	/usr/bin/certbot-auto --noninteractive --os-packages-only
 
-
-
-
-
 #COPY cli.ini /etc/letsencrypt/cli.ini	
 COPY crons.conf /config/crons.conf
 COPY firstrun.sh /config/firstrun.sh

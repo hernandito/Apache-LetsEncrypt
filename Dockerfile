@@ -27,7 +27,7 @@ RUN chmod +x /etc/my_init.d/firstrun.sh
 ADD crons.conf /config
 
 
-wget https://dl.eff.org/certbot-auto /usr/bin/
+RUN wget https://dl.eff.org/certbot-auto /usr/bin/
 RUN chmod a+x /usr/bin/certbot-auto
 ADD cli.ini /config/cli.ini
 
@@ -37,5 +37,5 @@ ADD cli.ini /config/cli.ini
 EXPOSE 80 443
 VOLUME /config
 VOLUME /etc/letsencrypt
-ENV YOUR_EMAIL="youremail@here.com"
-ENV YOUR_DOMAIN="yourdomain.com, www.yourdomain.com"
+ENV YOUR_EMAIL=
+ENV YOUR_DOMAIN=

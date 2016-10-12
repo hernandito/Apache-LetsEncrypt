@@ -26,8 +26,7 @@ RUN chmod +x /etc/my_init.d/firstrun.sh
 
 ADD crons.conf /config
 
-
-RUN wget https://dl.eff.org/certbot-auto /usr/bin/
+RUN wget -P /usr/bin https://dl.eff.org/certbot-auto
 RUN chmod a+x /usr/bin/certbot-auto
 ADD cli.ini /config/cli.ini
 

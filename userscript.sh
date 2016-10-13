@@ -12,7 +12,8 @@ if [ ! -f /usr/bin/certbot-auto ]; then
 	chmod a+x /usr/bin/certbot-auto
 	apt-get update
 	apt-get install -y mc
-	certbot-auto --noninteractive --os-packages-only
+	chmod a+x /config/dl.eff.org/certbot-auto
+	/config/dl.eff.org/certbot-auto --noninteractive --os-packages-only
 
 mkdir -p /etc/letsencrypt
 cat > /etc/letsencrypt/cli.ini <<EOF
@@ -23,8 +24,8 @@ cat > /etc/letsencrypt/cli.ini <<EOF
 rsa-key-size = 4096
  
 # Set email and domains.
-email = admin@example.com
-domains = example.com, www.example.com
+email = "$YOUR_EMAIL"
+domains = "$YOUR_DOMAIN"
  
 # Text interface.
 text = True
@@ -39,5 +40,5 @@ webroot-path = /var/www/html
 EOF
  
 # Obtain cert.
-	certbot-auto certonly --noninteractive --agree-tos
+	/config/dl.eff.org/certbot-auto certonly --noninteractive --agree-tos
 fi

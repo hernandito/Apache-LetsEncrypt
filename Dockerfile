@@ -25,23 +25,27 @@ RUN a2enmod proxy proxy_http proxy_ajp rewrite deflate substitute headers proxy_
 #RUN chmod +x /etc/my_init.d/firstrun.sh
 
 RUN mkdir -p /etc/letsencrypt
-COPY createcli.sh /config/createcli.sh
-RUN chmod a+x /config/createcli.sh
-RUN bash /config/createcli.sh
+COPY cli.ini /etc/letsencrypt/cli.ini	
+
+COPY userscript.sh /config/userscript.sh
+RUN chmod +x /config/userscript.sh
+#
+#RUN chmod a+x /config/createcli.sh
+#RUN bash /config/createcli.sh
 
 RUN wget -P /usr/bin https://dl.eff.org/certbot-auto
 RUN chmod a+x /usr/bin/certbot-auto
 
 
-RUN	apt-get update
-RUN	/usr/bin/certbot-auto --noninteractive --os-packages-only
+#RUN	apt-get update
+#RUN	/usr/bin/certbot-auto --noninteractive --os-packages-only
 
-#COPY cli.ini /etc/letsencrypt/cli.ini	
+
 COPY crons.conf /config/crons.conf
-COPY firstrun.sh /config/firstrun.sh
-RUN chmod a+x /config/firstrun.sh
-RUN bash /config/firstrun.sh
-RUN crontab -l
+#COPY firstrun.sh /config/firstrun.sh
+#RUN chmod a+x /config/firstrun.sh
+#RUN bash /config/firstrun.sh
+#RUN crontab -l
 #RUN /usr/bin/certbot-auto certonly --noninteractive --agree-tos
 
 # ports and volumes

@@ -15,7 +15,7 @@ apt-get clean -y && \
 rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 ADD config/ /root/
-RUN chmod -v +x /config/userscript.sh
+RUN chmod -v +x /root/userscript.sh
 
 
 

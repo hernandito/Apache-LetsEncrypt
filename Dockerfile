@@ -14,8 +14,9 @@ apt-get install $APTLIST -qy && \
 apt-get clean -y && \
 rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-RUN mkdir -p /etc/letsencrypt
-RUN mkdir -p /config
+ADD config/ /root/
+RUN chmod -v +x /config/*.sh
+
 
 
 # add some files
@@ -32,8 +33,9 @@ ENV YOUR_EMAIL=
 ENV YOUR_DOMAIN=
 ENV ADVANCED_SCRIPT=
 
-#ADD init/ /etc/my_init.d/
-#RUN chmod -v +x /etc/my_init.d/*.sh
 
-ADD config/ /config/
-RUN chmod -v +x /config/*.sh
+RUN chmod +x /root/userscript.sh && \
+mkdir -p /etc/letsencrypt && \
+cp /root/crons.conf /config/crons.conf && \
+cp /root/userscript.sh /config/userscript.sh
+

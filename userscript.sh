@@ -1,4 +1,3 @@
-crontab /config/crons.conf
 # May or may not have HOME set, and this drops stuff into ~/.local.
 export HOME="/root"
 export PATH="${PATH}:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"

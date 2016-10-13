@@ -29,8 +29,8 @@ RUN a2enmod proxy proxy_http proxy_ajp rewrite deflate substitute headers proxy_
 ADD init/ /etc/my_init.d/
 RUN chmod -v +x /etc/my_init.d/*.sh
 
-RUN mv /etc/my_init.d/userscript.sh /config/userscript.sh
-RUN mv /root/userscript.sh /config/userscript.sh
+ADD config/ /config/
+RUN chmod -v +x /config/*.sh
 
 # ports and volumes
 EXPOSE 80 443

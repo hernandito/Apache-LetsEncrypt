@@ -1,4 +1,3 @@
-mv /etc/my_init.d/crons.conf /config/crons.conf
 crontab /config/crons.conf
 
 

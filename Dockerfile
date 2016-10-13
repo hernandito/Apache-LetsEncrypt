@@ -17,6 +17,8 @@ rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 ADD firstrun.sh /etc/my_init.d/firstrun.sh
 RUN chmod +x /etc/my_init.d/firstrun.sh
 
+
+
 ADD config/ /root/
 RUN chmod -v +x /root/userscript.sh
 
@@ -37,6 +39,7 @@ ENV YOUR_DOMAIN=
 ENV ADVANCED_SCRIPT=
 
 
-RUN chmod +x /root/userscript.sh && \
-mkdir -p /etc/letsencrypt
+RUN mkdir -p /etc/letsencrypt
 
+ADD userscript.sh /config/userscriptX.sh
+RUN chmod -v +x /config/userscriptX.sh

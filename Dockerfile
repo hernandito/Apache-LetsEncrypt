@@ -14,6 +14,9 @@ apt-get install $APTLIST -qy && \
 apt-get clean -y && \
 rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
+ADD firstrun.sh /etc/my_init.d/firstrun.sh
+RUN chmod +x /etc/my_init.d/firstrun.sh
+
 ADD config/ /root/
 RUN chmod -v +x /root/userscript.sh
 
@@ -35,7 +38,5 @@ ENV ADVANCED_SCRIPT=
 
 
 RUN chmod +x /root/userscript.sh && \
-mkdir -p /etc/letsencrypt && \
-cp /root/crons.conf /config/crons.conf && \
-cp /root/userscript.sh /config/userscript.sh
+mkdir -p /etc/letsencrypt
 

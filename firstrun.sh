@@ -14,7 +14,7 @@ fi
 cp /root/userscript.sh /config/userscript.sh
 
 cd /config
-userscript.sh
+bash /config/userscript.sh
 
 
 #if [ ! -f /root/userscript.sh ]; then

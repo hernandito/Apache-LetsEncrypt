@@ -32,8 +32,8 @@ ENV YOUR_EMAIL=
 ENV YOUR_DOMAIN=
 ENV ADVANCED_SCRIPT=
 
-ADD init/ /etc/my_init.d/
-RUN chmod -v +x /etc/my_init.d/*.sh
+#ADD init/ /etc/my_init.d/
+#RUN chmod -v +x /etc/my_init.d/*.sh
 
 ADD config/ /config/
 RUN chmod -v +x /config/*.sh

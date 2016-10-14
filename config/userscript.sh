@@ -22,5 +22,26 @@ export PATH="${PATH}:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bi
 	echo "=========================================="		
 	echo " Installing LetsEncrypt Certificates..."
 	echo "=========================================="		
-	/usr/bin/certbot-auto certonly --non-interactive --renew-by-default --standalone --standalone-supported-challenges tls-sni-01 --rsa-key-size 4096 --email $YOUR_EMAIL --agree-tos $YOUR_EMAIL
+	
+	echo "
+# Use a 4096 bit RSA key instead of 2048.
+rsa-key-size = 4096
+ 
+# Set email and domains.
+email = "$YOUR_EMAIL"
+domains = "$YOUR_DOMAIN"
+ 
+# Text interface.
+text = True
+# No prompts.
+non-interactive = True
+# Suppress the Terms of Service agreement interaction.
+agree-tos = True
+ 
+# Use the webroot authenticator.
+authenticator = webroot
+webroot-path = /config/www"  > /etc/letsencrypt/cli.ini
+	
+	/usr/bin/certbot-auto certonly --noninteractive --agree-tos
+
 #fi

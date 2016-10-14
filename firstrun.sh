@@ -16,7 +16,7 @@ fi
 cp /root/userscript.sh /config/userscript.sh
 #chmod +x /config/userscript.sh
 
-
+./config/userscript.sh
 
 
 #if [ ! -f /root/userscript.sh ]; then

@@ -5,15 +5,11 @@ crontab /config/crons.conf
 export HOME="/root"
 export PATH="${PATH}:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
 
-if [ ! -f /usr/bin/certbot-auto ]; then
+if [ ! -f /etc/letsencrypt/cli.ini ]; then
 
-	
-	wget -p /usr/bin/ https://dl.eff.org/certbot-auto
-	chmod a+x /usr/bin/certbot-auto
 	apt-get update
 	apt-get install -y mc
-	chmod a+x /config/dl.eff.org/certbot-auto
-	/config/dl.eff.org/certbot-auto --noninteractive --os-packages-only
+
 
 mkdir -p /etc/letsencrypt
 cat > /etc/letsencrypt/cli.ini <<EOF
@@ -38,7 +34,8 @@ agree-tos = True
 authenticator = webroot
 webroot-path = /var/www/html
 EOF
- 
+	cd /defaults
+	certbot-auto --noninteractive --os-packages-only 
 # Obtain cert.
 	/config/dl.eff.org/certbot-auto certonly --noninteractive --agree-tos
 fi

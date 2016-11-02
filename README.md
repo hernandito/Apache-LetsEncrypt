@@ -1,6 +1,8 @@
+
+[![apache-le](https://raw.githubusercontent.com/hernandito/Apache-LetsEncrypt/master/apache_logo_medium_copy.png)]
+
+
 Based on LinuxServer.io's Apache Docker, this Docker add LetsEncrypt SSL Certificate generation and renewal. All the hard work and merits go to the LinixServer team.
-
-
 
 This is an apache web server docker with reverse proxy services enabled.  Reverse proxy gives the ability going to www.domain.com:8351 for a service, you can go direct to www.domain.com/service and also enable HTTPS.
 

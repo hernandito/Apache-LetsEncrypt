@@ -140,7 +140,7 @@ SSLEngine on
 	SSLProxyCheckPeerCN off
 	SSLProxyCheckPeerName off
 	SSLProxyCheckPeerExpire off 
-ProxyRequests off
+	ProxyRequests off
 
     <Directory \"/config/www/\">
         Options Indexes FollowSymLinks MultiViews
@@ -181,19 +181,3 @@ else
 	echo " "
 fi
 
-#if [ ! -f /config/kodi-alexa/kodi.py ]; then
-#	apt-get install -y git
-#	cd /config
-#	git clone https://github.com/m0ngr31/kodi-alexa.git
-#	cd /config/kodi-alexa
-#fi
-
-#echo "=================="
-#echo " Installing Ruby"
-#echo "=================="
-#apt-get install -y ruby
-#cd /config
-#wget -O- https://toolbelt.heroku.com/install-ubuntu.sh | sh
-#echo "====================================="
-#heroku --version
-#echo "====================================="

@@ -2,8 +2,8 @@
 if [ ! -f /config/apache/site-confs/dont-erase.txt ]; then
 
 echo "================================================"
-echo " Creating default.conf file w/ user Domain"
-echo "================================================"
+echo " Temporary default.conf file w/ user Domain"
+
 confcontent="
 ServerName $YOUR_DOMAIN
 <VirtualHost *:80>
@@ -39,8 +39,8 @@ ServerName $YOUR_DOMAIN
 	
 	appendconf=1
 
-#	echo " Done"
-	echo "========"	
+echo " Done"
+echo "================================================"
 fi
 
 
@@ -112,6 +112,7 @@ echo " "
 echo "======================================================="
 echo " Appending default.conf w/ proper certificates"
 finalconf="
+ServerName $YOUR_DOMAIN
 <VirtualHost *:80>
     DocumentRoot /config/www/
 
@@ -164,8 +165,8 @@ if [ ! -f /config/crons.conf ]; then
 	echo " Adding file and creating cron job"
 	echo "====================================="
 	cp /root/crons.conf /config/crons.conf
+	cp /root/sample-default.conf /config/sample-default.conf
 	crontab /config/crons.conf
-	echo " "
 	crontab -l
 	echo "====================================="
 	echo " "
@@ -175,7 +176,6 @@ else
 	echo " Crontab file found. Adding cron job"
 	echo "====================================="
 	crontab /config/crons.conf
-	echo " "
 	crontab -l
 	echo "====================================="
 	echo " "

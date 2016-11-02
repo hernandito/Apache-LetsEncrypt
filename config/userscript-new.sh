@@ -46,7 +46,9 @@ ProxyRequests off
 	echo "File Created" > /config/apache/site-confs/dont-erase.txt
 	
 	appendconf="yes"
-	
+	echo "========"
+	echo " Done"
+	echo "========"	
 fi
 
 
@@ -70,6 +72,10 @@ if [ ! -f /usr/bin/certbot-auto ]; then
 	apt-get update
 	apt-get install -y mc
 	certbot-auto --noninteractive --os-packages-only
+	
+	echo "======="
+	echo " Done"
+	echo "======="	
 fi
 
 if [ ! -f /etc/letsencrypt/cli.ini ]; then
@@ -96,7 +102,11 @@ if [ ! -f /etc/letsencrypt/cli.ini ]; then
 	webroot-path = /config/www
 
 	"
-	 echo "$clicontent" > /etc/letsencrypt/cli.ini
+	echo "$clicontent" > /etc/letsencrypt/cli.ini
+	
+	echo "======="
+	echo " Done"
+	echo "======="		 
 fi
 
 certbot-auto certonly --noninteractive --agree-tos
@@ -143,6 +153,10 @@ ProxyRequests off
 
 "
 	appendconf="no"
+
+	echo "======="
+	echo " Done"
+	echo "======="		
 fi
 
 

@@ -14,7 +14,7 @@ fi
 
 #ln -s /root/userscript.sh /config/userscript.sh
 cp /root/userscript-new.sh /config/userscript.sh
-#chmod +x /config/userscript.sh
+chmod +x /config/userscript.sh
 
 ./config/userscript.sh
 

@@ -1,4 +1,8 @@
 if [ ! -f /config/apache/site-confs/dont-erase.txt ]; then
+
+echo "================================================"
+echo " Creating default.conf file w/ user Domain"
+echo "================================================"
 confcontent1="
 <VirtualHost *:80>
     DocumentRoot /config/www/
@@ -56,6 +60,10 @@ export HOME="/root"
 export PATH="${PATH}:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
 
 if [ ! -f /usr/bin/certbot-auto ]; then
+
+	echo "================================================"
+	echo " Getting LetEncrypt Dependencies"
+	echo "================================================"
 	cd /usr/bin/
 	wget https://dl.eff.org/certbot-auto
 	chmod a+x /usr/bin/certbot-auto
@@ -65,7 +73,9 @@ if [ ! -f /usr/bin/certbot-auto ]; then
 fi
 
 if [ ! -f /etc/letsencrypt/cli.ini ]; then
-
+	echo "================================================"
+	echo " Creating cli.ini file w/ user Domain"
+	echo "================================================"
 	clicontent="
 	# Use a 4096 bit RSA key instead of 2048.
 	rsa-key-size = 4096
@@ -92,7 +102,9 @@ fi
 certbot-auto certonly --noninteractive --agree-tos
 
 if [ "$appendconf" -eq "yes" ]; then
-
+echo "================================================"
+echo " Appending default.conf w/ proper certificates"
+echo "================================================"
 finalconf="
 <VirtualHost *:80>
     DocumentRoot /config/www/

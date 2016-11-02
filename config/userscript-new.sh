@@ -18,26 +18,19 @@ confcontent1="
 <VirtualHost *:443>
 "
 confcontent2="
-SSLEngine on
-	SSLProtocol All -SSLv2 -SSLv3
-	SSLCipherSuite AES128+EECDH:AES128+EDH
-	SSLCertificateFile /config/keys/ssl.crt
-	SSLCertificateKeyFile /config/keys/decrypted.ssl.key
-	SSLCertificateChainFile /config/keys/sub.class1.server.ca.pem
-	SSLProxyEngine On
-	SSLProxyVerify none 
-	SSLProxyCheckPeerCN off
-	SSLProxyCheckPeerName off
-	SSLProxyCheckPeerExpire off 
-ProxyRequests off
+    SSLEngine on
+    SSLCertificateFile \"/config/keys/cert.crt\"
+    SSLCertificateKeyFile \"/config/keys/cert.key\"
+  DocumentRoot /config/www/
 
-    <Directory /config/www/>
+    <Directory \"/config/www/\">
         Options Indexes FollowSymLinks MultiViews
         AllowOverride all
             Order allow,deny
         Allow from all
     </Directory>
 </VirtualHost>
+
 "
 
     echo "$confcontent1" > /config/apache/site-confs/default.conf
@@ -46,7 +39,7 @@ ProxyRequests off
 	echo "File Created" > /config/apache/site-confs/dont-erase.txt
 	
 	appendconf="yes"
-	echo "========"
+
 	echo " Done"
 	echo "========"	
 fi
@@ -73,9 +66,9 @@ if [ ! -f /usr/bin/certbot-auto ]; then
 	apt-get install -y mc
 	certbot-auto --noninteractive --os-packages-only
 	
-	echo "======="
+	echo "================================================"
 	echo " Done"
-	echo "======="	
+	echo "================================================"
 fi
 
 if [ ! -f /etc/letsencrypt/cli.ini ]; then

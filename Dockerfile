@@ -24,8 +24,8 @@ RUN chmod +x /etc/my_init.d/firstrun.sh
 
 RUN mkdir -p /etc/letsencrypt
 
-ADD https://dl.eff.org/certbot-auto /usr/bin/certbot-auto
-RUN chmod a+x /usr/bin/certbot-auto
+#ADD https://dl.eff.org/certbot-auto /usr/bin/certbot-auto
+#RUN chmod a+x /usr/bin/certbot-auto
 
 # add some files
 ADD services/ /etc/service/

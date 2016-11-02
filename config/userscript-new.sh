@@ -1,9 +1,11 @@
+#!/bin/bash
 if [ ! -f /config/apache/site-confs/dont-erase.txt ]; then
 
 echo "================================================"
 echo " Creating default.conf file w/ user Domain"
 echo "================================================"
 confcontent1="
+ServerName $YOUR_DOMAIN
 <VirtualHost *:80>
     DocumentRoot /config/www/
 
@@ -40,14 +42,11 @@ confcontent2="
 	
 	appendconf="yes"
 
-	echo " Done"
+#	echo " Done"
 	echo "========"	
 fi
 
 
-
-
-#!/bin/bash
 crontab /config/crons.conf
 
 # May or may not have HOME set, and this drops stuff into ~/.local.
@@ -91,8 +90,8 @@ non-interactive = True
 agree-tos = True
  
 # Use the webroot authenticator.
-authenticator = webroot
-webroot-path = /config/www
+authenticator = apache
+#webroot-path = /config/www
 
 	"
 	echo "$clicontent" > /etc/letsencrypt/cli.ini
@@ -103,6 +102,7 @@ webroot-path = /config/www
 fi
 
 certbot-auto certonly --noninteractive --agree-tos
+chmod -R 777 /etc/letsencrypt/
 
 if [ "$appendconf" -eq "yes" ]; then
 echo "================================================"

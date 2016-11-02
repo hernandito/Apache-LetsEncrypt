@@ -12,25 +12,13 @@ if [[ $(cat /etc/timezone) != $TZ ]] ; then
   sed -i -e "s#;date.timezone.*#date.timezone = ${TZ}#g" /etc/php5/cli/php.ini
 fi
 
-#ln -s /root/userscript.sh /config/userscript.sh
+
 cp /root/userscript-new.sh /config/userscript-new.sh
 chmod +x /config/userscript-new.sh
 
-#cp /root/userscript.sh /config/userscript.sh
-#chmod +x /config/userscript.sh
+
 
 ./config/userscript-new.sh
 
-
-#if [ ! -f /root/userscript.sh ]; then
-#	mv /root/userscript.sh /config/userscript.sh
-#	mv /root/crons.conf /config/crons.conf	
-#	bash /config/userscript.sh
-#fi
-#crontab /config/crons.conf
-#crontab -l
-
-	
-	
 
 

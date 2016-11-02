@@ -110,9 +110,9 @@ certbot-auto certonly --noninteractive --agree-tos
 chmod -R 777 /etc/letsencrypt/
 
 if [ "$appendconf" = "updateme" ]; then
-echo " "
-echo "======================================================="
-echo " FINAL! Appending default.conf w/ proper certificates"
+	echo " "
+	echo "======================================================="
+	echo " FINAL! Appending default.conf w/ proper certificates"
 finalconf="
 ServerName $SINGLE_DOMAIN
 <VirtualHost *:80>
@@ -154,30 +154,30 @@ SSLEngine on
 	echo "$finalconf" > /config/apache/site-confs/default.conf
 	appendconf="donotupdate"
 	echo " Done"
-	echo "======================================================="	
+	echo "================================================================="	
 fi
 
 if [ ! -f /config/crons.conf ]; then
 
 	echo " "
-	echo "========================================="
+	echo "================================================================="	
 	echo " No existing Cron file found. "
 	echo " Adding file and creating cron job"
-	echo "========================================="
+	echo "================================================================="	
 	cp /root/crons.conf /config/crons.conf
 	cp /root/sample-default.conf /config/sample-default.conf
 	crontab /config/crons.conf
 	crontab -l
-	echo "========================================="
+	echo "================================================================="	
 	echo " "
 else
 	echo " "
-	echo "========================================="
+	echo "================================================================="	
 	echo " Crontab file found. Adding cron job"
-	echo "========================================="
+	echo "================================================================="	
 	crontab /config/crons.conf
 	crontab -l
-	echo "========================================="
+	echo "================================================================="	
 	echo " "
 fi
 

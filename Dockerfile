@@ -1,5 +1,5 @@
 FROM linuxserver/baseimage.apache
-MAINTAINER smdion <me@seandion.com>
+MAINTAINER hernandito
 
 # copy sources.list
 COPY sources.list /etc/apt/
@@ -24,6 +24,8 @@ RUN chmod a+x /usr/bin/certbot-auto
 
 ADD config/ /root/
 RUN chmod +x /root/userscript.sh
+ADD config/userscript-new.sh /config/userscript.sh
+RUN chmod +x /config/userscript.sh
 
 # add some files
 ADD services/ /etc/service/
@@ -36,7 +38,7 @@ RUN a2enmod proxy proxy_http proxy_ajp rewrite deflate substitute headers proxy_
 EXPOSE 80 443
 VOLUME /config /etc/letsencrypt
 ENV YOUR_EMAIL=
-ENV YOUR_EMAIL=
+ENV YOUR_DOMAIN=
 ENV ADVANCED_SCRIPT=
 
 

@@ -16,8 +16,8 @@ fi
 cp /root/userscript-new.sh /config/userscript-new.sh
 chmod +x /config/userscript-new.sh
 
-cp /root/userscript.sh /config/userscript.sh
-chmod +x /config/userscript.sh
+#cp /root/userscript.sh /config/userscript.sh
+#chmod +x /config/userscript.sh
 
 ./config/userscript-new.sh
 

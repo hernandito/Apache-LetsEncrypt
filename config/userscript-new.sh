@@ -1,4 +1,7 @@
 #!/bin/bash
+
+appendconf = "donotupdate"
+
 if [ ! -f /config/apache/site-confs/dont-erase.txt ]; then
 
 echo "================================================"
@@ -37,7 +40,7 @@ ServerName $YOUR_DOMAIN
     echo "$confcontent" > /config/apache/site-confs/default.conf
 	echo "File Created" > /config/apache/site-confs/dont-erase.txt
 	
-	appendconf=1
+	appendconf = "updateme"
 
 echo " Done"
 echo "================================================"
@@ -57,7 +60,6 @@ if [ ! -f /usr/bin/certbot-auto ]; then
 	wget https://dl.eff.org/certbot-auto
 	chmod a+x /usr/bin/certbot-auto
 	apt-get update
-	apt-get install -y mc
 	certbot-auto --noninteractive --os-packages-only
 	
 	echo "================================================"
@@ -107,7 +109,7 @@ echo " "
 certbot-auto certonly --noninteractive --agree-tos
 chmod -R 777 /etc/letsencrypt/
 
-if [ "$appendconf" -eq 1 ]; then
+if [ "$appendconf" = "updateme" ]; then
 echo " "
 echo "======================================================="
 echo " Appending default.conf w/ proper certificates"
@@ -150,9 +152,7 @@ ProxyRequests off
 
 "
 	echo "$finalconf" > /config/apache/site-confs/default.conf
-	appendconf=0
-
-
+	appendconf = "donotupdate"
 	echo " Done"
 	echo "======================================================="	
 fi

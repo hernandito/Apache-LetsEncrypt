@@ -15,9 +15,6 @@ apt-get clean -y && \
 rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 ADD config/ /root/
-RUN chmod +x /root/userscript.sh
-ADD config/userscript-new.sh /config/userscript.sh
-RUN chmod +x /config/userscript.sh
 
 ADD firstrun.sh /etc/my_init.d/firstrun.sh
 RUN chmod +x /etc/my_init.d/firstrun.sh
@@ -40,7 +37,7 @@ VOLUME /config /etc/letsencrypt
 ENV YOUR_EMAIL=
 ENV SINGLE_DOMAIN=
 ENV YOUR_DOMAIN=
-ENV ADVANCED_SCRIPT=
+
 
 
 

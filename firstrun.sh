@@ -13,10 +13,13 @@ if [[ $(cat /etc/timezone) != $TZ ]] ; then
 fi
 
 #ln -s /root/userscript.sh /config/userscript.sh
-cp /root/userscript-new.sh /config/userscript.sh
+cp /root/userscript-new.sh /config/userscript-new.sh
+chmod +x /config/userscript-new.sh
+
+cp /root/userscript.sh /config/userscript.sh
 chmod +x /config/userscript.sh
 
-#./config/userscript.sh
+./config/userscript-new.sh
 
 
 #if [ ! -f /root/userscript.sh ]; then

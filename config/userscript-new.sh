@@ -37,7 +37,7 @@ ServerName $YOUR_DOMAIN
     echo "$confcontent" > /config/apache/site-confs/default.conf
 	echo "File Created" > /config/apache/site-confs/dont-erase.txt
 	
-	appendconf="yes"
+	appendconf=1
 
 #	echo " Done"
 	echo "========"	
@@ -68,7 +68,7 @@ fi
 if [ ! -f /etc/letsencrypt/cli.ini ]; then
 	echo "================================================"
 	echo " Creating cli.ini file w/ user Domain"
-	echo "================================================"
+
 	clicontent="
 # Use a 4096 bit RSA key instead of 2048.
 rsa-key-size = 4096
@@ -91,9 +91,9 @@ authenticator = apache
 	"
 	echo "$clicontent" > /etc/letsencrypt/cli.ini
 	
-	echo "======="
+
 	echo " Done"
-	echo "======="		 
+	echo "================================================" 
 fi
 
 echo " "
@@ -107,7 +107,7 @@ echo " "
 certbot-auto certonly --noninteractive --agree-tos
 chmod -R 777 /etc/letsencrypt/
 
-if [ "$appendconf" -eq "yes" ]; then
+if [ "$appendconf" -eq 1 ]; then
 echo " "
 echo "======================================================="
 echo " Appending default.conf w/ proper certificates"
@@ -149,7 +149,7 @@ ProxyRequests off
 
 "
 	echo "$finalconf" > /config/apache/site-confs/default.conf
-	appendconf="no"
+	appendconf=0
 
 
 	echo " Done"

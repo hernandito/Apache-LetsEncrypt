@@ -1,6 +1,6 @@
 #!/bin/bash
 
-appendconf = "donotupdate"
+appendconf="donotupdate"
 
 if [ ! -f /config/apache/site-confs/dont-erase.txt ]; then
 
@@ -8,7 +8,7 @@ echo "================================================"
 echo " Temporary default.conf file w/ user Domain"
 
 confcontent="
-ServerName $YOUR_DOMAIN
+ServerName $SINGLE_DOMAIN
 <VirtualHost *:80>
     DocumentRoot /config/www/
 
@@ -21,7 +21,7 @@ ServerName $YOUR_DOMAIN
 </VirtualHost>
 
 <VirtualHost *:443>
-	ServerName $YOUR_DOMAIN
+	ServerName $SINGLE_DOMAIN
     SSLEngine on
     SSLCertificateFile \"/config/keys/cert.crt\"
     SSLCertificateKeyFile \"/config/keys/cert.key\"
@@ -40,7 +40,7 @@ ServerName $YOUR_DOMAIN
     echo "$confcontent" > /config/apache/site-confs/default.conf
 	echo "File Created" > /config/apache/site-confs/dont-erase.txt
 	
-	appendconf = "updateme"
+	appendconf="updateme"
 
 echo " Done"
 echo "================================================"
@@ -112,9 +112,9 @@ chmod -R 777 /etc/letsencrypt/
 if [ "$appendconf" = "updateme" ]; then
 echo " "
 echo "======================================================="
-echo " Appending default.conf w/ proper certificates"
+echo " FINAL! Appending default.conf w/ proper certificates"
 finalconf="
-ServerName $YOUR_DOMAIN
+ServerName $SINGLE_DOMAIN
 <VirtualHost *:80>
     DocumentRoot /config/www/
 
@@ -127,7 +127,7 @@ ServerName $YOUR_DOMAIN
 </VirtualHost>
 
 <VirtualHost *:443>
-    ServerName $YOUR_DOMAIN
+    ServerName $SINGLE_DOMAIN
 	
 SSLEngine on
 	SSLProtocol All -SSLv2 -SSLv3
@@ -152,7 +152,7 @@ ProxyRequests off
 
 "
 	echo "$finalconf" > /config/apache/site-confs/default.conf
-	appendconf = "donotupdate"
+	appendconf="donotupdate"
 	echo " Done"
 	echo "======================================================="	
 fi
@@ -160,24 +160,24 @@ fi
 if [ ! -f /config/crons.conf ]; then
 
 	echo " "
-	echo "====================================="
+	echo "========================================="
 	echo " No existing Cron file found. "
 	echo " Adding file and creating cron job"
-	echo "====================================="
+	echo "========================================="
 	cp /root/crons.conf /config/crons.conf
 	cp /root/sample-default.conf /config/sample-default.conf
 	crontab /config/crons.conf
 	crontab -l
-	echo "====================================="
+	echo "========================================="
 	echo " "
 else
 	echo " "
-	echo "====================================="
+	echo "========================================="
 	echo " Crontab file found. Adding cron job"
-	echo "====================================="
+	echo "========================================="
 	crontab /config/crons.conf
 	crontab -l
-	echo "====================================="
+	echo "========================================="
 	echo " "
 fi
 

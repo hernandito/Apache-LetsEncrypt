@@ -38,6 +38,7 @@ RUN a2enmod proxy proxy_http proxy_ajp rewrite deflate substitute headers proxy_
 EXPOSE 80 443
 VOLUME /config /etc/letsencrypt
 ENV YOUR_EMAIL=
+ENV SINGLE_DOMAIN=
 ENV YOUR_DOMAIN=
 ENV ADVANCED_SCRIPT=
 

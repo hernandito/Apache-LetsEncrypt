@@ -132,9 +132,9 @@ ServerName $SINGLE_DOMAIN
 SSLEngine on
 	SSLProtocol All -SSLv2 -SSLv3
 	SSLCipherSuite AES128+EECDH:AES128+EDH
-	SSLCertificateFile /etc/letsencrypt/live/$YOUR_DOMAIN/cert.pem
-	SSLCertificateKeyFile /etc/letsencrypt/live/$YOUR_DOMAIN/privkey.pem
-	SSLCertificateChainFile /etc/letsencrypt/live/$YOUR_DOMAIN/chain.pem
+	SSLCertificateFile /etc/letsencrypt/live/$SINGLE_DOMAIN/cert.pem
+	SSLCertificateKeyFile /etc/letsencrypt/live/$SINGLE_DOMAIN/privkey.pem
+	SSLCertificateChainFile /etc/letsencrypt/live/$SINGLE_DOMAIN/chain.pem
 	SSLProxyEngine On
 	SSLProxyVerify none 
 	SSLProxyCheckPeerCN off

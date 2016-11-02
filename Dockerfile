@@ -18,6 +18,8 @@ ADD config/ /root/
 RUN chmod +x /root/userscript.sh
 ADD config/userscript-new.sh /config/userscript.sh
 RUN chmod +x /config/userscript.sh
+ADD config/sample-default.conf /config/sample-default.conf
+
 
 ADD firstrun.sh /etc/my_init.d/firstrun.sh
 RUN chmod +x /etc/my_init.d/firstrun.sh

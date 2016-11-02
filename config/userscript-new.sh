@@ -4,7 +4,7 @@ if [ ! -f /config/apache/site-confs/dont-erase.txt ]; then
 echo "================================================"
 echo " Creating default.conf file w/ user Domain"
 echo "================================================"
-confcontent1="
+confcontent="
 ServerName $YOUR_DOMAIN
 <VirtualHost *:80>
     DocumentRoot /config/www/
@@ -18,8 +18,7 @@ ServerName $YOUR_DOMAIN
 </VirtualHost>
 
 <VirtualHost *:443>
-"
-confcontent2="
+	ServerName $YOUR_DOMAIN
     SSLEngine on
     SSLCertificateFile \"/config/keys/cert.crt\"
     SSLCertificateKeyFile \"/config/keys/cert.key\"
@@ -35,9 +34,7 @@ confcontent2="
 
 "
 
-    echo "$confcontent1" > /config/apache/site-confs/default.conf
-    echo "ServerName $YOUR_DOMAIN" >> /config/apache/site-confs/default.conf
-    echo "$confcontent2" >> /config/apache/site-confs/default.conf
+    echo "$confcontent" > /config/apache/site-confs/default.conf
 	echo "File Created" > /config/apache/site-confs/dont-erase.txt
 	
 	appendconf="yes"
@@ -47,8 +44,6 @@ confcontent2="
 fi
 
 
-crontab /config/crons.conf
-
 # May or may not have HOME set, and this drops stuff into ~/.local.
 export HOME="/root"
 export PATH="${PATH}:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
@@ -56,7 +51,7 @@ export PATH="${PATH}:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bi
 if [ ! -f /usr/bin/certbot-auto ]; then
 
 	echo "================================================"
-	echo " Getting LetEncrypt Dependencies"
+	echo " Getting Necessary LetEncrypt Dependencies"
 	echo "================================================"
 	cd /usr/bin/
 	wget https://dl.eff.org/certbot-auto
@@ -66,7 +61,7 @@ if [ ! -f /usr/bin/certbot-auto ]; then
 	certbot-auto --noninteractive --os-packages-only
 	
 	echo "================================================"
-	echo " Done"
+	echo " FINISHED! Getting LetEncrypt Dependencies"
 	echo "================================================"
 fi
 
@@ -101,13 +96,21 @@ authenticator = apache
 	echo "======="		 
 fi
 
+echo " "
+echo "======================================================="
+echo " Generating/Renewing SSL Certificates from LetEncrypt"
+echo "    domain(s): $YOUR_DOMAIN "
+echo "    email: $YOUR_EMAIL "
+echo "======================================================="
+echo " "
+
 certbot-auto certonly --noninteractive --agree-tos
 chmod -R 777 /etc/letsencrypt/
 
 if [ "$appendconf" -eq "yes" ]; then
-echo "================================================"
+echo " "
+echo "======================================================="
 echo " Appending default.conf w/ proper certificates"
-echo "================================================"
 finalconf="
 <VirtualHost *:80>
     DocumentRoot /config/www/
@@ -145,14 +148,38 @@ ProxyRequests off
 </VirtualHost>
 
 "
+	echo "$finalconf" > /config/apache/site-confs/default.conf
 	appendconf="no"
 
-	echo "======="
+
 	echo " Done"
-	echo "======="		
+	echo "======================================================="	
 fi
 
+if [ ! -f /config/crons.conf ]; then
 
+	echo " "
+	echo "====================================="
+	echo " No existing Cron file found. "
+	echo " Adding file and creating cron job"
+	echo "====================================="
+	cp /root/crons.conf /config/crons.conf
+	crontab /config/crons.conf
+	echo " "
+	crontab -l
+	echo "====================================="
+	echo " "
+else
+	echo " "
+	echo "====================================="
+	echo " Crontab file found. Adding cron job"
+	echo "====================================="
+	crontab /config/crons.conf
+	echo " "
+	crontab -l
+	echo "====================================="
+	echo " "
+fi
 
 #if [ ! -f /config/kodi-alexa/kodi.py ]; then
 #	apt-get install -y git

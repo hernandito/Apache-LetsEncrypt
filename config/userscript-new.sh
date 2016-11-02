@@ -76,23 +76,23 @@ if [ ! -f /etc/letsencrypt/cli.ini ]; then
 	echo " Creating cli.ini file w/ user Domain"
 	echo "================================================"
 	clicontent="
-	# Use a 4096 bit RSA key instead of 2048.
-	rsa-key-size = 4096
-	 
-	# Set email and domains.
-	email = $YOUR_EMAIL
-	domains = $YOUR_DOMAIN
-	 
-	# Text interface.
-	text = True
-	# No prompts.
-	non-interactive = True
-	# Suppress the Terms of Service agreement interaction.
-	agree-tos = True
-	 
-	# Use the webroot authenticator.
-	authenticator = webroot
-	webroot-path = /config/www
+# Use a 4096 bit RSA key instead of 2048.
+rsa-key-size = 4096
+ 
+# Set email and domains.
+email = $YOUR_EMAIL
+domains = $YOUR_DOMAIN
+ 
+# Text interface.
+text = True
+# No prompts.
+non-interactive = True
+# Suppress the Terms of Service agreement interaction.
+agree-tos = True
+ 
+# Use the webroot authenticator.
+authenticator = webroot
+webroot-path = /config/www
 
 	"
 	echo "$clicontent" > /etc/letsencrypt/cli.ini

@@ -7,7 +7,7 @@ COPY sources.list /etc/apt/
 ENV APTLIST="libapache2-mod-php5 wget mc inotify-tools php5-gd php5-sqlite php5-mcrypt php5-tidy php5-mysql libapache2-mod-proxy-html"
 
 # install main packages
-RUN apt-get update -q && \
+# RUN apt-get update -q && \
 apt-get install $APTLIST -qy && \
 
 # cleanup

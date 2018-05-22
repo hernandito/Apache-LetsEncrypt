@@ -8,7 +8,7 @@ ENV APTLIST="libapache2-mod-php5 wget mc inotify-tools php5-gd php5-sqlite php5-
 
 # install main packages
 # RUN apt-get update -q && \
-apt-get install $APTLIST -qy && \
+RUN apt-get install $APTLIST -qy && \
 
 # cleanup
 apt-get clean -y && \

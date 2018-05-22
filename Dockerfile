@@ -1,5 +1,5 @@
 #FROM linuxserver/baseimage.apache
-FROM phusion/baseimage
+FROM lsiobase/alpine
 MAINTAINER hernandito
 
 # copy sources.list
@@ -8,11 +8,11 @@ COPY sources.list /etc/apt/
 ENV APTLIST="libapache2-mod-php5 wget mc inotify-tools php5-gd php5-sqlite php5-mcrypt php5-tidy php5-mysql libapache2-mod-proxy-html"
 
 # install main packages
-RUN apt-get update -qy && \
-apt-get install $APTLIST -qy && \
+RUN apk update -qy && \
+apk install $APTLIST -qy && \
 
 # cleanup
-apt-get clean -y && \
+apk clean -y && \
 rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 ADD config/ /root/
